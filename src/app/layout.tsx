@@ -3,6 +3,7 @@ import { League_Spartan, Roboto_Condensed } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/layout/header";
 import Footer from "@/layout/footer";
+import Providers from "./providers";
 
 const league = Roboto_Condensed({
   variable: "--font-league-sans",
@@ -20,16 +21,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' className='bg-background uppercase'>
-      <body
-        className={`${league.variable} antialiased container mx-auto p-4 flex flex-col min-h-screen`}
+    <Providers>
+      <html
+        lang='en'
+        className='bg-gradient-to-bl from-black via-black bg-no-repeat min-h-screen to-gray-800'
       >
-        <div className='font-sans'>
-          <Header />
-          <div className='flex-1'>{children}</div>
-          <Footer />
-        </div>
-      </body>
-    </html>
+        <body
+          className={`${league.variable} antialiased container mx-auto p-4 flex flex-col uppercase text-white `}
+        >
+          <div className='font-sans'>
+            <Header />
+            <div className='flex-1 mt-16'>{children}</div>
+            <Footer />
+          </div>
+        </body>
+      </html>
+    </Providers>
   );
 }
