@@ -1,22 +1,49 @@
+import { Athlete } from "@/types/athlete";
+
 type Props = {
-  performanceMetrics: {
-    name: string;
-    value: string;
-  }[];
+  athlete: Athlete;
 };
-export default function ProfileMetrics(props: Props) {
+export default function ProfileMetrics({ athlete }: Props) {
+  const performanceMetrics = [
+    { name: "40 Yard Dash", value: athlete.metrics?.fortyYardDash },
+    { name: "Vertical Jump", value: athlete.metrics?.verticalJump },
+    { name: "Bench Press", value: athlete.metrics?.benchPressReps },
+    { name: "Cone Drill 3", value: athlete.metrics?.threeConeDrill },
+    { name: "Broad Jump", value: athlete.metrics?.broadJump },
+    { name: "Max Bench", value: athlete.metrics?.maxBench },
+    { name: "Max Squat", value: athlete.metrics?.maxSquat },
+    { name: "Max Power Clean", value: athlete.metrics?.maxPowerClean },
+    { name: "Grip Strength", value: athlete.metrics?.gripStrength },
+    { name: "Sprint Speed", value: athlete.metrics?.sprintSpeed },
+    { name: "Top End Speed", value: athlete.metrics?.topEndSpeed },
+    {
+      name: "Shuttle Agility",
+      value: athlete.metrics?.shuttleAgility,
+    },
+    {
+      name: "Explosiveness",
+      value: athlete.metrics?.explosivenessScore,
+    },
+  ];
+
   return (
     <div className='mt-6'>
       <h2 className='text-lg font-semibold mb-2 text-white/90'>
         Performance Metrics
       </h2>
       <div className='grid grid-cols-2 gap-4 text-sm text-white/80'>
-        {props.performanceMetrics.map((metric, i) => (
-          <div key={i}>
-            <p className='font-semibold'>{metric.name}</p>
-            <p>{metric.value}</p>
-          </div>
-        ))}
+        {performanceMetrics.map((metric, i) => {
+          if (!metric.value) {
+            return null;
+          } else {
+            return (
+              <div key={i}>
+                <p className='font-semibold'>{metric.name}</p>
+                <p>{metric.value}</p>
+              </div>
+            );
+          }
+        })}
       </div>
     </div>
   );

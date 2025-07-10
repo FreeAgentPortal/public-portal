@@ -5,7 +5,7 @@ import { Header } from "@/layout/header";
 import Footer from "@/layout/footer";
 import Providers from "./providers";
 
-const league = Roboto_Condensed({
+const roboto = Roboto_Condensed({
   variable: "--font-league-sans",
   subsets: ["latin"],
 });
@@ -23,17 +23,16 @@ export default function RootLayout({
   return (
     <Providers>
       <html
+        data-theme='dark'
         lang='en'
-        className='bg-gradient-to-bl from-black via-black bg-no-repeat min-h-screen to-gray-800'
+        className='bg-gradient-to-bl from-black via-black to-gray-800 min-h-screen'
       >
         <body
-          className={`${league.variable} antialiased container mx-auto p-4 flex flex-col uppercase text-white `}
+          className={`${roboto.variable} antialiased font-sans flex flex-col container mx-auto  p-4 uppercase text-white min-h-screen`}
         >
-          <div className='font-sans'>
-            <Header />
-            <div className='flex-1 mt-16'>{children}</div>
-            <Footer />
-          </div>
+          <Header />
+          <div className='flex-1 mt-16'>{children}</div>
+          <Footer />
         </body>
       </html>
     </Providers>

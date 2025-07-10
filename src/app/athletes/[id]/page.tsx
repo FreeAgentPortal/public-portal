@@ -2,51 +2,60 @@
 import ProfileHeader from "@/views/player/player-header";
 import ProfileActions from "@/views/player/player-actions";
 import ProfileTabs from "@/views/player/player-tabs";
-import ProfileBio from "@/views/player/player-bio";
 import ProfileMetrics from "@/views/player/player-metrics";
 import ProfileVideos from "@/views/player/player-videos";
 import { useAthlete } from "@/state/useAthlete";
+import { useParams, useSearchParams } from "next/navigation";
+import PlayerSkeleton from "@/views/player/player-skeleton";
+import ProfileMeasurements from "@/views/player/player-measurements";
+import { BackButton } from "@/layout/back-button";
 
-export default function AthleteProfilePage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const { data: athlete, isLoading } = useAthlete(params.id);
+export default function AthleteProfilePage() {
+  const params = useParams();
+  const { data: athlete, isLoading } = useAthlete(params.id as string);
+
+  const searchParams = useSearchParams();
 
   if (isLoading || !athlete) {
-    return <p className='text-white'>Loading athlete profile...</p>;
+    return <PlayerSkeleton />;
   }
 
-  const performanceMetrics = [
-    { name: "Yard Dash 40", value: athlete.metrics?.yardDash40 ?? "N/A" },
-    { name: "Vertical Jump", value: athlete.metrics?.verticalJump ?? "N/A" },
-    { name: "Bench Press", value: athlete.metrics?.benchPress ?? "N/A" },
-    { name: "Cone Drill 3", value: athlete.metrics?.coneDrill3 ?? "N/A" },
-    { name: "Broad Jump", value: athlete.metrics?.broadJump ?? "N/A" },
-    { name: "Shuttle Run", value: athlete.metrics?.shuttleRun ?? "N/A" },
-  ];
+  const tabs = [
+    { name: "Metrics", slug: "metrics" },
+    { name: "Measurements", slug: "measurements" },
+    { name: "Rating", slug: "rating" },
+    { name: "Videos", slug: "videos" },
+    { name: "Photos", slug: "photos" },
+  ] as const;
 
-  const tabs = ["Bio", "Performance", "Videos", "Team Interactions"];
+  type TabSlug = (typeof tabs)[number]["slug"];
+
+  const slugParam = searchParams.get("tab");
+  const currentTabSlug: TabSlug = tabs.some((t) => t.slug === slugParam)
+    ? (slugParam as TabSlug)
+    : "metrics";
+
   const actions = ["Express Interest", "Boost Profile"];
 
   return (
     <div className='text-white p-6 font-sans'>
       <div className='mx-auto'>
-        <ProfileHeader
-          name={athlete.fullName}
-          position={athlete.positions?.[0] ?? "N/A"}
-          height={athlete.measurements?.height ?? "N/A"}
-          weight={athlete.measurements?.weight ?? "N/A"}
-          gradClass={new Date(athlete.birthdate).getFullYear().toString()}
-          recruitRating={"4-Star Recruit"}
-          ranking={"Top 10 QB Nationally"}
-        />
+        <BackButton />
+        <ProfileHeader athlete={athlete} />
         <ProfileActions actions={actions} />
-        <ProfileTabs tabs={tabs} />
-        <ProfileBio bio={athlete.bio ?? "No bio available."} />
-        <ProfileMetrics performanceMetrics={performanceMetrics} />
-        <ProfileVideos videos={athlete.highlightVideos ?? []} />
+        <ProfileTabs
+          tabs={tabs}
+          currentTabSlug={currentTabSlug}
+          searchParams={searchParams}
+        />
+        {currentTabSlug === "metrics" && <ProfileMetrics athlete={athlete} />}
+        {currentTabSlug === "measurements" && (
+          <ProfileMeasurements athlete={athlete} />
+        )}
+        {currentTabSlug === "rating" && (
+          <h1 className='text-3xl font-bold'>Rating: {athlete.rating}</h1>
+        )}
+        {currentTabSlug === "videos" && <ProfileVideos athelte={athlete} />}
       </div>
     </div>
   );

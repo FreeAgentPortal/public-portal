@@ -2,8 +2,8 @@
 @plugin "daisyui";
 
 :root {
-  background-color: #0a0a0a;
-  --foreground: #ffffff;
+  --background: #0a0a0a;
+  --foreground: #ededed;
   --card-background: #ffffff;
 
   --color-primary: rgb(18, 61, 111);
@@ -19,6 +19,7 @@
 
 @theme inline {
   --color-foreground: var(--foreground);
+  --color-background: var(--background);
 
   --color-card-background: var(--card-background);
 
@@ -36,14 +37,7 @@
   --font-sans: var(--font-league-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family:  */
 }

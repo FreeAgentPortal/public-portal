@@ -1,14 +1,17 @@
-import { HighlightVideo } from "@/types/highlight-video";
+import { Athlete } from "@/types/athlete";
 
 type Props = {
-  videos: HighlightVideo[];
+  athelte: Athlete;
 };
 
-export default function ProfileVideos(props: Props) {
+export default function ProfileVideos({ athelte }: Props) {
+  if (!athelte.highlightVideos.length) {
+    return null;
+  }
   return (
     <div className='mt-6'>
       <h2 className='text-lg font-semibold mb-2 text-white/90'>Videos</h2>
-      {props.videos.map((video, i) => (
+      {athelte.highlightVideos.map((video, i) => (
         <div
           key={i}
           className='bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-xl shadow-inner'

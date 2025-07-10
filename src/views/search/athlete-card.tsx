@@ -1,4 +1,5 @@
 import { Athlete } from "@/types/athlete";
+import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
@@ -6,21 +7,28 @@ type Props = {
 };
 
 export default function AthleteCard(props: Props) {
-  const position = props.athlete.positions?.[0] ?? "Unknown";
-  const avatarUrl = `https://api.dicebear.com/7.x/open-peeps/svg?seed=${props.athlete.fullName}`;
-
   return (
     <Link href={`/athletes/${props.athlete._id}`}>
-      <div className='bg-base-100 p-4 rounded-xl shadow hover:shadow-lg transition'>
-        <img
-          src={avatarUrl}
+      <div className='card bg-base-100/75 backdrop-blur-sm border border-white/20 p-4 rounded-xl shadow-inner hover:shadow-xl hover:scale-[101%] transition-all duration-300 ease-in-out'>
+        <Image
+          src={
+            props.athlete.profileImageUrl ||
+            `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`
+          }
           alt={props.athlete.fullName}
-          className='rounded-full w-24 h-24 mx-auto'
+          width={96}
+          height={96}
+          className='rounded-full w-24 h-24 mx-auto object-cover bg-black'
         />
         <h2 className='mt-2 text-center font-semibold'>
           {props.athlete.fullName}
         </h2>
-        <p className='text-center text-sm opacity-70'>{position}</p>
+
+        {props.athlete.positions.map((position) => (
+          <p key={position._id} className='text-center text-sm opacity-70'>
+            {position.name} ({position.abbreviation})
+          </p>
+        ))}
       </div>
     </Link>
   );
