@@ -9,8 +9,7 @@ export default function ProfileVideos({ athelte }: Props) {
     return null;
   }
   return (
-    <div className='mt-6'>
-      <h2 className='text-lg font-semibold mb-2 text-white/90'>Videos</h2>
+    <div>
       {athelte.highlightVideos.map((video, i) => (
         <div
           key={i}

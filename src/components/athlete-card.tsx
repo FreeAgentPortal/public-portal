@@ -24,11 +24,19 @@ export default function AthleteCard(props: Props) {
           {props.athlete.fullName}
         </h2>
 
-        {props.athlete.positions.map((position) => (
-          <p key={position._id} className='text-center text-sm opacity-70'>
-            {position.name} ({position.abbreviation})
+        {props.athlete.positions.map(
+          (position, index) =>
+            position.name && (
+              <p key={index} className='text-center text-sm opacity-70'>
+                {position.name ?? ""} ({position.abbreviation ?? ""})
+              </p>
+            )
+        )}
+        {props.athlete.college && (
+          <p className='text-center text-sm opacity-70'>
+            {props.athlete.college}
           </p>
-        ))}
+        )}
       </div>
     </Link>
   );

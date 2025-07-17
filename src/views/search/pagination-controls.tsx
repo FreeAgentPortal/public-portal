@@ -1,6 +1,7 @@
 type Props = {
   currentPage: number;
   onPageChange: (page: number) => void;
+  isNextPage: boolean;
 };
 export default function PaginationControls(props: Props) {
   return (
@@ -14,6 +15,7 @@ export default function PaginationControls(props: Props) {
       </button>
       <span className='text-white'>Page {props.currentPage}</span>
       <button
+        disabled={props.isNextPage !== true}
         className='btn btn-sm btn-outline'
         onClick={() => props.onPageChange(props.currentPage + 1)}
       >

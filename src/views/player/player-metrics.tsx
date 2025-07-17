@@ -27,24 +27,19 @@ export default function ProfileMetrics({ athlete }: Props) {
   ];
 
   return (
-    <div className='mt-6'>
-      <h2 className='text-lg font-semibold mb-2 text-white/90'>
-        Performance Metrics
-      </h2>
-      <div className='grid grid-cols-2 gap-4 text-sm text-white/80'>
-        {performanceMetrics.map((metric, i) => {
-          if (!metric.value) {
-            return null;
-          } else {
-            return (
-              <div key={i}>
-                <p className='font-semibold'>{metric.name}</p>
-                <p>{metric.value}</p>
-              </div>
-            );
-          }
-        })}
-      </div>
+    <div className='grid grid-cols-2 gap-4 text-sm text-white/80'>
+      {performanceMetrics.map((metric, i) => {
+        if (!metric.value) {
+          return null;
+        } else {
+          return (
+            <div key={i}>
+              <p className='font-semibold'>{metric.name}</p>
+              <p>{metric.value}</p>
+            </div>
+          );
+        }
+      })}
     </div>
   );
 }

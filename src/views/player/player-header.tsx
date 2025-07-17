@@ -26,9 +26,27 @@ export default function ProfileHeader({ athlete }: Props) {
             {athlete.fullName}
           </h1>
           <p className='text-white/80'>
-            {athlete.positions[0].name} ({athlete.positions[0].abbreviation}) |{" "}
-            {athlete.measurements.weight} lbs | {athlete.measurements.height} in
+            {[
+              athlete.positions[0]?.name && athlete.positions[0]?.abbreviation
+                ? `${athlete.positions[0].name} (${athlete.positions[0].abbreviation})`
+                : null,
+              athlete.measurements.weight &&
+                `${athlete.measurements.weight} lbs`,
+              athlete.measurements.height &&
+                `${athlete.measurements.height} in`,
+            ]
+              .filter(Boolean)
+              .join(" | ")}
           </p>
+          {athlete.college && (
+            <p className='text-white/80'>{athlete.college}</p>
+          )}
+          {athlete.espnid && (
+            <p className='text-white/80 badge mt-3'>
+              <strong>ESPN ID:</strong> {athlete.espnid}
+              {athlete.espnid}
+            </p>
+          )}
         </div>
         <div className='flex items-center gap-1'>
           {[...Array(5)].map((_, i) => (

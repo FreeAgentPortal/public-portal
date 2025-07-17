@@ -1,4 +1,5 @@
 "use client";
+import { useAthletes } from "@/state/useAthletes";
 import AthleteGrid from "@/views/search/athlete-grid";
 import PaginationControls from "@/views/search/pagination-controls";
 import SearchControls from "@/views/search/search-controls";
@@ -11,17 +12,23 @@ const Search = (props: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const page = Number(searchParams.get("page")) || 1;
+  const allFilters = Object.fromEntries(searchParams.entries());
   const search = searchParams.get("search") || "";
-  const position = searchParams.get("position") || "";
+  const page = searchParams.get("page") || "1";
 
   const updateQuery = useCallback(
     (updates: Record<string, string>) => {
       const params = new URLSearchParams(searchParams.toString());
-      Object.entries(updates).forEach(([key, value]) =>
-        value ? params.set(key, value) : params.delete(key)
-      );
-      router.push(`/athletes?${params}`);
+
+      Object.entries(updates).forEach(([key, value]) => {
+        if (value) {
+          params.set(key, value);
+        } else {
+          params.delete(key);
+        }
+      });
+
+      router.push(`/athletes?${params.toString()}`);
     },
     [router, searchParams]
   );
@@ -32,13 +39,14 @@ const Search = (props: Props) => {
 
       <SearchControls
         search={search}
-        position={position}
         updateQuery={updateQuery}
+        filters={allFilters}
       />
-      <AthleteGrid page={page} filters={{ search, position }} />
-      <PaginationControls
-        currentPage={page}
-        onPageChange={(p) => updateQuery({ page: String(p) })}
+      <AthleteGrid
+        page={page}
+        filters={allFilters}
+        search={search}
+        updateQuery={updateQuery}
       />
     </div>
   );

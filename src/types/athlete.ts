@@ -75,4 +75,5 @@ export type Athlete = {
   links: Link[];
   highlightVideos: HighlightVideo[];
   rating?: number;
+  college: string;
 };
