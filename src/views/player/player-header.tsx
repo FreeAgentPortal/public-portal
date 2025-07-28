@@ -48,7 +48,7 @@ export default function ProfileHeader({ athlete }: Props) {
             </p>
           )}
         </div>
-        <div className='flex items-center gap-1'>
+        {/* <div className='flex items-center gap-1'>
           {[...Array(5)].map((_, i) => (
             <Gem
               key={i}
@@ -57,7 +57,7 @@ export default function ProfileHeader({ athlete }: Props) {
               aria-hidden='true'
             />
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

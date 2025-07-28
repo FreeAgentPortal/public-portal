@@ -20,6 +20,7 @@ const nextConfig: NextConfig = {
         hostname: "nfldraftdiamonds.com",
       },
     ],
+    unoptimized: true,
   },
 };
 
