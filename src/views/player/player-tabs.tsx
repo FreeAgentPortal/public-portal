@@ -8,7 +8,6 @@ import ProfileVideos from "./player-videos";
 import clsx from "clsx";
 import { Lock, LockIcon } from "lucide-react";
 import { useMe } from "@/state/useMe";
-import ComingSoon from "@/components/coming-soon";
 import ProfileRating from "./player-rating";
 type Props = {
   athlete: Athlete;
