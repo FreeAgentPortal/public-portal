@@ -27,6 +27,10 @@ export default function ProfileMeasurements({ athlete }: Props) {
     { name: "BMI", value: athlete.measurements?.bmi },
   ];
 
+  if (measurements.every((measure) => !measure.value)) {
+    return <p className='text-gray-500'>No measurements available.</p>;
+  }
+
   return (
     <div className='grid grid-cols-2 gap-4 text-sm text-white/80'>
       {measurements.map((metric, i) => {

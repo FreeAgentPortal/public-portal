@@ -2,6 +2,7 @@
 
 import { PlanCard } from "@/components/plan-card";
 import { SubscriptionPlan } from "@/types/plan";
+import Link from "next/link";
 
 type Plan = {
   plans: SubscriptionPlan[];
@@ -20,6 +21,14 @@ export default function PlansView({ plans }: Plan) {
           .map((plan) => (
             <PlanCard key={plan._id} plan={plan} billingCycle={"monthly"} />
           ))}
+      </div>
+      <div className='mt-12 flex justify-center items-center'>
+        <Link
+          href='https://auth.thefreeagentportal.com/auth/register'
+          className='btn btn-primary w-full btn-lg'
+        >
+          Register now!
+        </Link>
       </div>
     </div>
   );

@@ -60,10 +60,6 @@ export const PlanCard = ({ plan, billingCycle }: Props) => {
           </li>
         ))}
       </ul>
-
-      <div className='mt-auto'>
-        <button className='btn btn-primary w-full'>Choose Plan</button>
-      </div>
     </div>
   );
 };

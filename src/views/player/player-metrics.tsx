@@ -26,6 +26,10 @@ export default function ProfileMetrics({ athlete }: Props) {
     },
   ];
 
+  if (performanceMetrics.every((metric) => !metric.value)) {
+    return <p className='text-gray-500'>No performance metrics available.</p>;
+  }
+
   return (
     <div className='grid grid-cols-2 gap-4 text-sm text-white/80'>
       {performanceMetrics.map((metric, i) => {

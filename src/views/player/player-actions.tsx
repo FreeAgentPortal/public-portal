@@ -1,3 +1,4 @@
+import { useMe } from "@/state/useMe";
 import { Athlete } from "@/types/athlete";
 import clsx from "clsx";
 import Link from "next/link";
@@ -6,6 +7,7 @@ type Props = {
   athlete: Athlete;
 };
 export default function ProfileActions({ athlete }: Props) {
+  const { data: user } = useMe();
   const actions = [
     {
       name: "Claim",
@@ -16,12 +18,17 @@ export default function ProfileActions({ athlete }: Props) {
     {
       name: "View Full Profile",
       link: "https://athlete.thefreeagentportal.com/athletes/" + athlete?._id,
-      should: athlete?._id !== undefined,
+      should:
+        athlete?._id !== undefined &&
+        user?.payload?.profileRefs?.scout !== undefined,
       style: "bg-primary",
     },
     {
       name: "View ESPN Profile",
-      link: "https://www.espn.com/nfl/player?athleteId=" + athlete?.espnid,
+      link:
+        "https://www.espn.com/college-football/player/_/id/" +
+        athlete?.espnid +
+        "/name",
       should: athlete?.espnid !== undefined,
       style: "bg-white/10",
     },

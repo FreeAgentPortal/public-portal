@@ -39,7 +39,6 @@ export default function ProfileTabs({ athlete }: Props) {
       slug: "videos",
       component: <ProfileVideos athelte={athlete} />,
     },
-    { name: "Photos", slug: "photos", component: <h1>Photos</h1> },
   ] as const;
 
   type TabSlug = (typeof tabs)[number]["slug"];

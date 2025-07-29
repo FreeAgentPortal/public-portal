@@ -1,79 +1,49 @@
-import { HighlightVideo } from "./highlight-video";
-
-export type BirthPlace = {
-  city?: string;
-  state?: string;
-  country?: string;
-};
-
-export type Measurements = {
-  height: number;
-  weight: number;
-  armLength: number;
-  handSize: number;
-  wingspan: number;
-  neckSize: number;
-  chestSize: number;
-  thighCircumference: number;
-  calfCircumference: number;
-  bodyFatPercentage: number;
-  bmi: number;
-};
-
-export type Metrics = {
-  fortyYardDash: number;
-  tenYardSplit: number;
-  twentyYardShuttle: number;
-  threeConeDrill: number;
-  verticalJump: number;
-  broadJump: number;
-  benchPressReps: number;
-
-  maxBench: number;
-  maxSquat: number;
-  maxPowerClean: number;
-  gripStrength: number;
-
-  sprintSpeed: number;
-  topEndSpeed: number;
-  shuttleAgility: number;
-  explosivenessScore: number;
-};
-
-export type Position = {
+export interface Athlete {
   _id: string;
-  name: string;
-  abbreviation: string;
-};
-
-export type Link = {
-  _id: string;
-  text: string;
-  shortText: string;
-  href: string;
-  rel: string[];
-  isExternal: boolean;
-};
-
-export type DraftInfo = {
-  year: number;
-  round: number;
-};
-
-export type Athlete = {
-  _id: string;
-  espnid: string;
+  espnid?: string;
+  userId: string;
   fullName: string;
-  birthdate: string;
-  birthPlace: BirthPlace;
-  profileImageUrl: string;
-  experienceYears: number;
-  draft?: DraftInfo;
-  measurements: Measurements;
-  metrics: Metrics;
-  positions: Position[];
-  links: Link[];
-  highlightVideos: HighlightVideo[];
-  rating?: number;
-  college: string;
-};
+  contactNumber?: string;
+  email?: string;
+  birthPlace?: {
+    city: string;
+    state: string;
+    country: string;
+  };
+  links?: {
+    text: string;
+    shortText: string;
+    href: string;
+    rel: string[];
+    isExternal: boolean;
+  }[];
+  draft?: {
+    year: number;
+    round: number;
+    pick: number;
+    team: string;
+  };
+  birthdate?: Date;
+  measurements?: Record<string, string | number>;
+  metrics?: Record<string, number>;
+  college?: string;
+  positions?: [
+    {
+      name: string;
+      abbreviation: string;
+    }
+  ];
+  graduationYear?: number;
+  bio?: string;
+  highSchool?: string;
+  awards?: string[];
+  strengths?: string;
+  weaknesses?: string;
+  experienceYears?: number;
+  testimony?: string;
+  profileImageUrl?: string;
+  highlightVideos?: string[];
+  diamondRating?: number;
+  createdAt: Date;
+  updatedAt: Date;
+}

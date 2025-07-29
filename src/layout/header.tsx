@@ -6,15 +6,26 @@ import React from "react";
 import useAuth from "../hooks/useAuth";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
+import { NavItem } from "@/components/nav-item";
 
 type Props = {};
+export type NavItemType = {
+  name: string;
+  href?: string;
+  onClick?: () => void;
+  isButton?: boolean;
+  inMenu?: boolean;
+  should?: boolean;
+  isDanger?: boolean;
+  isActive?: boolean;
+};
 
 export const Header = (props: Props) => {
   useAuth();
   const { data: user, isLoading } = useMe();
   const pathname = usePathname();
 
-  const Menu = [
+  const Nav: NavItemType[] = [
     {
       name: "Search",
       href: "/athletes",
@@ -33,14 +44,64 @@ export const Header = (props: Props) => {
       isButton: true,
       should: user?.payload._id === undefined,
     },
+
+    {
+      name: "Admin Portal",
+      onClick: () => {
+        const token = localStorage.getItem("token");
+
+        window.location.href =
+          "https://admin.thefreeagentportal.com?token=" + token;
+      },
+      isButton: true,
+      inMenu: true,
+      should: user?.payload?.profileRefs?.admin !== undefined,
+    },
+    {
+      name: "Scout Portal",
+      onClick: () => {
+        const token = localStorage.getItem("token");
+
+        window.location.href =
+          "https://scout.thefreeagentportal.com?token=" + token;
+      },
+      isButton: true,
+      inMenu: true,
+      should: user?.payload?.profileRefs?.scout !== undefined,
+    },
+    {
+      name: "Team Panel",
+      onClick: () => {
+        const token = localStorage.getItem("token");
+
+        window.location.href =
+          "https://team.thefreeagentportal.com?token=" + token;
+      },
+      isButton: true,
+      inMenu: true,
+      should: user?.payload?.profileRefs?.scout !== undefined,
+    },
+    {
+      name: "Athlete Panel",
+      onClick: () => {
+        const token = localStorage.getItem("token");
+
+        window.location.href =
+          "https://athlete.thefreeagentportal.com?token=" + token;
+      },
+      isButton: true,
+      inMenu: true,
+      should: user?.payload?.profileRefs?.athlete !== undefined,
+    },
     {
       name: "Logout",
-      href: process.env.NEXT_PUBLIC_AUTH_URL || "/HELP",
       onClick: () => {
         localStorage.removeItem("token");
         window.location.href = "/";
       },
       isButton: true,
+      inMenu: true,
+      isDanger: true,
       should: user?.payload?._id !== undefined,
     },
   ];
@@ -55,10 +116,16 @@ export const Header = (props: Props) => {
         </div>
         <div className='flex-none'>
           <div className='flex-none'>
-            <ul className='menu menu-horizontal p-0 flex items-center gap-4'>
+            <ul className='menu menu-horizontal p-0 flex items-center gap-8'>
+              {Nav.filter((item) => item.should && !item.inMenu).map(
+                (item, index) => (
+                  <NavItem key={index} item={item} />
+                )
+              )}
+
               {user && (
-                <li>
-                  <Link href={`/athletes/${user?.payload._id}`}>
+                <div className='dropdown dropdown-bottom dropdown-end'>
+                  <button tabIndex={0} className='m-1 cursor-pointer'>
                     <Image
                       src={
                         user?.payload.profileImageUrl ||
@@ -69,22 +136,23 @@ export const Header = (props: Props) => {
                       height={32}
                       className='rounded-full'
                     />
-                  </Link>
-                </li>
-              )}
-              {Menu.filter((item) => item.should).map((item, index) => (
-                <li key={index} onClick={item.onClick}>
-                  <Link
-                    href={item.href}
-                    className={clsx({
-                      "font-bold": item.isActive,
-                      "btn btn-primary": item.isButton,
-                    })}
+                  </button>
+                  <ul
+                    tabIndex={0}
+                    className='dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm flex flex-col items-start gap-2'
                   >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
+                    <h1 className='text-xl font-bold p-4'>
+                      {user?.payload.fullName}
+                    </h1>
+
+                    {Nav.filter((item) => item.should && item.inMenu).map(
+                      (item, index) => (
+                        <NavItem key={index} item={item} fullWidth />
+                      )
+                    )}
+                  </ul>
+                </div>
+              )}
             </ul>
           </div>
         </div>

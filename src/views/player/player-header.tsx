@@ -1,13 +1,30 @@
 import { Athlete } from "@/types/athlete";
 import Image from "next/image";
 import { Gem } from "lucide-react";
+import { useMe } from "@/state/useMe";
 
 type Props = {
   athlete: Athlete;
 };
 
 export default function ProfileHeader({ athlete }: Props) {
-  const rating = athlete.rating ?? 3;
+  const position = athlete.positions?.[0];
+  const positionText =
+    position?.name && position?.abbreviation
+      ? `${position.name} (${position.abbreviation})`
+      : null;
+
+  const weight = athlete.measurements?.["weight"];
+  const height = athlete.measurements?.["height"];
+
+  const weightText = weight ? `${weight} lbs` : null;
+  const heightText = height ? `${height} in` : null;
+
+  const infoText = [positionText, weightText, heightText]
+    .filter(Boolean)
+    .join(" | ");
+
+  const { data: user, isLoading } = useMe();
   return (
     <div className='flex items-center gap-4 mt-6'>
       <Image
@@ -25,19 +42,7 @@ export default function ProfileHeader({ athlete }: Props) {
           <h1 className='text-2xl font-bold text-white drop-shadow-md'>
             {athlete.fullName}
           </h1>
-          <p className='text-white/80'>
-            {[
-              athlete.positions[0]?.name && athlete.positions[0]?.abbreviation
-                ? `${athlete.positions[0].name} (${athlete.positions[0].abbreviation})`
-                : null,
-              athlete.measurements.weight &&
-                `${athlete.measurements.weight} lbs`,
-              athlete.measurements.height &&
-                `${athlete.measurements.height} in`,
-            ]
-              .filter(Boolean)
-              .join(" | ")}
-          </p>
+          <p className='text-white/80'>{infoText}</p>
           {athlete.college && (
             <p className='text-white/80'>{athlete.college}</p>
           )}
@@ -48,16 +53,24 @@ export default function ProfileHeader({ athlete }: Props) {
             </p>
           )}
         </div>
-        {/* <div className='flex items-center gap-1'>
-          {[...Array(5)].map((_, i) => (
-            <Gem
-              key={i}
-              size={25}
-              className={i < rating ? "text-cyan-400" : "text-white/20"}
-              aria-hidden='true'
-            />
-          ))}
-        </div> */}
+        {athlete.diamondRating &&
+          athlete.diamondRating > 0 &&
+          user?.payload?.profileRefs?.scout && (
+            <div className='flex items-center gap-1'>
+              {[...Array(5)].map((_, i) => (
+                <Gem
+                  key={i}
+                  size={25}
+                  className={
+                    athlete.diamondRating && i < athlete.diamondRating
+                      ? "text-cyan-400"
+                      : "text-white/20"
+                  }
+                  aria-hidden='true'
+                />
+              ))}
+            </div>
+          )}
       </div>
     </div>
   );
