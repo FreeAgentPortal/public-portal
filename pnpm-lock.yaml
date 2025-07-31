@@ -4,6 +4,7 @@ specifiers:
   '@tailwindcss/postcss': ^4
   '@tanstack/react-query': ^5.81.5
   '@tanstack/react-query-devtools': ^5.81.5
+  '@types/he': ^1.2.3
   '@types/node': ^20
   '@types/react': ^19
   '@types/react-dom': ^19
@@ -11,6 +12,7 @@ specifiers:
   clsx: ^2.1.1
   daisyui: ^5.0.43
   framer-motion: ^12.23.0
+  he: ^1.2.0
   html-react-parser: ^5.2.5
   lucide-react: ^0.525.0
   next: 15.3.4
@@ -24,9 +26,11 @@ specifiers:
 dependencies:
   '@tanstack/react-query': 5.81.5_react@19.1.0
   '@tanstack/react-query-devtools': 5.81.5_v6mkxvazux7z26inya5aavsllu
+  '@types/he': 1.2.3
   '@uidotdev/usehooks': 2.4.1_j6k6oay3ugsr56slyfvma2drry
   clsx: 2.1.1
   framer-motion: 12.23.0_j6k6oay3ugsr56slyfvma2drry
+  he: 1.2.0
   html-react-parser: 5.2.5_j34s3v6eqkmb7bf44dvxgw2kha
   lucide-react: 0.525.0_react@19.1.0
   next: 15.3.4_j6k6oay3ugsr56slyfvma2drry
@@ -566,6 +570,10 @@ packages:
       react: 19.1.0
     dev: false
 
+  /@types/he/1.2.3:
+    resolution: {integrity: sha512-q67/qwlxblDzEDvzHhVkwc1gzVWxaNxeyHUBF4xElrvjL11O+Ytze+1fGpBHlr/H9myiBUaUXNnNPmBHxxfAcA==}
+    dev: false
+
   /@types/node/20.19.4:
     resolution: {integrity: sha512-OP+We5WV8Xnbuvw0zC2m4qfB/BJvjyCwtNjhHdJxV1639SGSKrLmJkc3fMnp2Qy8nJyHp8RO6umxELN/dS1/EA==}
     dependencies:
@@ -731,6 +739,11 @@ packages:
   /graceful-fs/4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
     dev: true
+
+  /he/1.2.0:
+    resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
+    hasBin: true
+    dev: false
 
   /html-dom-parser/5.1.1:
     resolution: {integrity: sha512-+o4Y4Z0CLuyemeccvGN4bAO20aauB2N9tFEAep5x4OW34kV4PTarBHm6RL02afYt2BMKcr0D2Agep8S3nJPIBg==}

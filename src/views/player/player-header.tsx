@@ -57,7 +57,7 @@ export default function ProfileHeader({ athlete }: Props) {
           athlete.diamondRating > 0 &&
           user?.payload?.profileRefs?.scout && (
             <div className='flex items-center gap-1'>
-              {[...Array(5)].map((_, i) => (
+              {[...Array(athlete.diamondRating)].map((_, i) => (
                 <Gem
                   key={i}
                   size={25}

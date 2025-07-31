@@ -6,6 +6,7 @@ import Footer from "@/layout/footer";
 import Providers from "./providers";
 import { Notification } from "@/components/notification";
 import { Suspense } from "react";
+import { Loading } from "@/components/loading";
 
 const roboto = Roboto_Condensed({
   variable: "--font-league-sans",
@@ -13,8 +14,8 @@ const roboto = Roboto_Condensed({
 });
 
 export const metadata: Metadata = {
-  title: "Free Agent Portal",
-  description: "A portal for free agents to find opportunities",
+  title: "The Free Agent Portal",
+  description: "Your Path to the Next Level Starts Here",
 };
 
 export default function RootLayout({
@@ -24,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <Providers>
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<Loading />}>
         <html
           data-theme='dark'
           lang='en'

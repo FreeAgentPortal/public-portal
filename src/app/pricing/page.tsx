@@ -1,4 +1,5 @@
 "use client";
+import { Loading } from "@/components/loading";
 import { usePlans } from "@/state/usePlans";
 import PlansView from "@/views/plans/plans";
 
@@ -7,7 +8,7 @@ type Props = {};
 const Pricing = (props: Props) => {
   const { data, isLoading } = usePlans();
   if (isLoading || !data) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   const filteredPlans = data.payload

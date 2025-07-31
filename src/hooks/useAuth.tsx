@@ -10,7 +10,10 @@ export default function useAuth() {
 
   useEffect(() => {
     const token = searchParams.get("token") || localStorage.getItem("token");
-    if (token) {
+    const url = new URL(window.location.href);
+    const urlToken = url.searchParams.get("token");
+
+    if (token && urlToken) {
       localStorage.setItem("token", token);
       const url = new URL(window.location.href);
       url.searchParams.delete("token");

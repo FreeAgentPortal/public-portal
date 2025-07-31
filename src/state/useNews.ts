@@ -5,6 +5,7 @@ import { NewsItem } from "@/types/news";
 export function useNews() {
   return useQuery<ApiResponse<NewsItem[]>>({
     queryKey: ["news"],
-    queryFn: () => apiFetch<NewsItem[]>(`/feed/articles`),
+    queryFn: () =>
+      apiFetch<NewsItem[]>(`/feed/articles?limit=3&pageNumber=1&pageLimit=10`),
   });
 }

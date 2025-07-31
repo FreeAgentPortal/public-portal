@@ -23,21 +23,25 @@ export default function ProfileTabs({ athlete }: Props) {
       name: "Metrics",
       slug: "metrics",
       component: <ProfileMetrics athlete={athlete} />,
+      hide: false,
     },
     {
       name: "Measurements",
       slug: "measurements",
       component: <ProfileMeasurements athlete={athlete} />,
+      hide: false,
     },
     {
       name: "Rating",
       slug: "rating",
       component: <ProfileRating athlete={athlete} />,
+      hide: !user?.payload.profileRefs.scout,
     },
     {
       name: "Videos",
       slug: "videos",
       component: <ProfileVideos athelte={athlete} />,
+      hide: false,
     },
   ] as const;
 
@@ -53,10 +57,10 @@ export default function ProfileTabs({ athlete }: Props) {
     return index >= 0 ? index : 0;
   }, [currentTabSlug]);
 
-  const setActiveTab = (index: number) => {
-    const slug = tabs[index].slug;
+  const setActiveTab = (slug: TabSlug) => {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set("tab", slug);
+    // Use replace to avoid polluting browser history for simple tab switches
     router.replace(`?${newParams.toString()}`);
   };
 
@@ -67,21 +71,23 @@ export default function ProfileTabs({ athlete }: Props) {
   return (
     <div>
       <div className='mt-6 border-b border-white/20 flex gap-6 text-sm '>
-        {tabs.map((tab, i) => (
-          <button
-            key={i}
-            className={`pb-2 cursor-pointer ${
-              i === activeTab
-                ? "border-b-2 border-blue-400 text-white"
-                : "text-white/60 hover:text-white"
-            }`}
-            onClick={() => {
-              setActiveTab(i);
-            }}
-          >
-            {tab.name}
-          </button>
-        ))}
+        {tabs
+          .filter((t) => !t.hide)
+          .map((tab, i) => (
+            <button
+              key={tab.slug}
+              className={`pb-2 cursor-pointer ${
+                tab.slug === currentTabSlug
+                  ? "border-b-2 border-blue-400 text-white"
+                  : "text-white/60 hover:text-white"
+              }`}
+              onClick={() => {
+                setActiveTab(tab.slug);
+              }}
+            >
+              {tab.name}
+            </button>
+          ))}
       </div>
 
       <div
