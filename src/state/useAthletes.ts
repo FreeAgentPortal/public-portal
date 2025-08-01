@@ -4,9 +4,15 @@ import { apiFetch } from "@/lib/api";
 import type { Athlete } from "@/types/athlete";
 import { filter, s } from "framer-motion/client";
 function formatCustomQuery(filters?: Record<string, string>): string | null {
-  if (!filters) {
-    return null;
-  }
+  // Initialize filters with active=true
+  //if (!filters) {
+  //  return null;
+  //}
+  const enforcedFilters = {
+    active: "true",
+    ...filters, //Spread input filters, allowing overrides but keeping active=true
+  };
+
   return Object.entries(filters)
     .map(([key, value]) => {
       const safeValue = /\s/.test(value) ? `"${value}"` : value;
