@@ -10,14 +10,16 @@ export default function ProfileActions({ athlete }: Props) {
   const { data: user } = useMe();
   const actions = [
     {
-      name: "Claim",
-      link: "https://auth.thefreeagentportal.com/claim/" + athlete?.espnid,
+      name: "Claim Profile",
+      link:
+        "https://auth.thefreeagentportal.com/auth/claim/?espnid=" +
+        athlete?.espnid,
       should: athlete?._id === undefined,
       style: "bg-primary",
     },
     {
       name: "View Full Profile",
-      link: "https://athlete.thefreeagentportal.com/athletes/" + athlete?._id,
+      link: "https://scout.thefreeagentportal.com/athlete/" + athlete?._id,
       should:
         athlete?._id !== undefined &&
         user?.payload?.profileRefs?.scout !== undefined,

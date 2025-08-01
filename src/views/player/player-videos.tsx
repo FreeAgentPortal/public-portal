@@ -11,7 +11,6 @@ export default function ProfileVideos({ athelte }: Props) {
 
   return (
     <div className='space-y-2'>
-      <h2 className='text-lg font-semibold text-gray-800'>Highlight Videos</h2>
       <ul className='list-disc list-inside space-y-1'>
         {athelte.highlightVideos.map((url, index) => (
           <li key={index}>
@@ -19,7 +18,7 @@ export default function ProfileVideos({ athelte }: Props) {
               href={url}
               target='_blank'
               rel='noopener noreferrer'
-              className='text-blue-600 hover:underline'
+              className='font-black underline hover:mb-4'
             >
               Video {index + 1}
             </a>
