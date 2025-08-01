@@ -19,9 +19,13 @@ export function useAthletes(
   search?: string,
   filters?: Record<string, string>
 ) {
-  delete filters?.page;
-  delete filters?.search;
-  const customQuery = formatCustomQuery(filters);
+  const modifiedFilters: Record<string, string> = {
+    ...filters,
+    isActive: "true",
+  };
+  delete modifiedFilters.page;
+  delete modifiedFilters.search;
+  const customQuery = formatCustomQuery(modifiedFilters);
   const queryString = `pageNumber=${page}${search ? `&keyword=${search}` : ""}${
     customQuery ? `&filterOptions=${customQuery}` : ""
   }`;

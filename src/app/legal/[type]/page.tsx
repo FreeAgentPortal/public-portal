@@ -1,6 +1,6 @@
 "use client";
 import { Loading } from "@/components/loading";
-import { useLegal } from "@/state/useLegal";
+import { useLegalType } from "@/state/useLegal";
 import parse from "html-react-parser";
 import he from "he";
 import { useParams } from "next/navigation";
@@ -9,7 +9,7 @@ type Props = {};
 
 const Legal = (props: Props) => {
   const params = useParams();
-  const { data, isLoading } = useLegal(params.type as string);
+  const { data, isLoading } = useLegalType(params.type as string);
 
   if (isLoading || !data) {
     return <Loading />;
