@@ -21,7 +21,7 @@ export default function Hero() {
 
           <p className='text-lg sm:text-xl'>
             Join the Free Agent Portal to discover new opportunities, showcase
-            your talent, and connect with teams across the country.
+            your talent, and connect with teams across the world.
           </p>
         </motion.div>
 
