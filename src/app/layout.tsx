@@ -15,7 +15,7 @@ const roboto = Roboto_Condensed({
 
 export const metadata: Metadata = {
   title: "The Free Agent Portal",
-  description: "Your Path to the Next Level Starts Here",
+  description: "Where Pro teams look for available free agent talent.",
 };
 
 export default function RootLayout({

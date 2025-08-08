@@ -12,8 +12,10 @@ export default function PlansView({ plans }: Plan) {
     <div className='max-w-7xl mx-auto px-4 py-12'>
       <h2 className='text-5xl font-bold text-center mb-6'>Choose Your Plan</h2>
       <p className='text-lg text-center mb-10'>
-        Whether you're just starting out or ready to go pro, we've got a plan
-        that fits.
+        Going pro for the first time?
+        In between teams?
+        Declaring your free agent availability?
+        Choose the plan that fits you.
       </p>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
         {plans

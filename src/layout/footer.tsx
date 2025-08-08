@@ -12,7 +12,7 @@ const Footer = () => {
             &copy; 2025 The Free Agent Portal
           </p>
           <p className='text-xs text-gray-500 mt-1'>
-            "The Free Agent Portal" is a joint venture of Sterling Haven LLC and
+            "The Free Agent Portal" is a joint venture service of Sterling Haven LLC and
             Draft Diamonds LLC.
           </p>
         </div>
