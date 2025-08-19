@@ -79,7 +79,7 @@ export const Header = (props: Props) => {
       },
       isButton: true,
       inMenu: true,
-      should: user?.payload?.profileRefs?.scout !== undefined,
+      should: user?.payload?.profileRefs?.team !== undefined,
     },
     {
       name: "Athlete Panel",
