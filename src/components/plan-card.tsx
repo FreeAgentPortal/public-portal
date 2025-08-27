@@ -10,9 +10,7 @@ type Props = {
 
 export const PlanCard = ({ plan, billingCycle }: Props) => {
   const isYearly = billingCycle === "yearly";
-  const price = isYearly
-    ? plan.price * 12 * ((100 - plan.yearlyDiscount) / 100)
-    : plan.price;
+  const price = isYearly ? plan.price * 12 * ((100 - plan.yearlyDiscount) / 100) : plan.price;
 
   const tierColorMap: Record<string, string> = {
     silver: "border-gray-300 bg-white text-gray-800",
@@ -31,32 +29,24 @@ export const PlanCard = ({ plan, billingCycle }: Props) => {
         }
       )}
     >
-      {plan.mostPopular && (
-        <div className='absolute top-3 right-3 badge badge-primary'>
-          Most Popular
-        </div>
-      )}
+      {plan.mostPopular && <div className="absolute top-3 right-3 badge badge-primary">Most Popular</div>}
 
-      <h3 className='text-2xl font-bold mb-2'>{plan.name}</h3>
-      <p className='mb-4 text-sm opacity-80'>{plan.description}</p>
+      <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+      <p className="mb-4 text-sm opacity-80">{plan.description}</p>
 
-      <div className='mb-6'>
-        <span className='text-4xl font-extrabold'>${price.toFixed(0)}</span>
-        <span className='text-sm ml-1 text-muted'>
-          /{isYearly ? "year" : "month"}
-        </span>
+      <div className="mb-6">
+        <span className="text-4xl font-extrabold">${price.toFixed(0)}</span>
+        <span className="text-sm ml-1 text-muted">/{isYearly ? "year" : "month"}</span>
         {isYearly && plan.yearlyDiscount > 0 && (
-          <div className='text-sm text-green-600 font-semibold mt-1'>
-            Save {plan.yearlyDiscount}% annually
-          </div>
+          <div className="text-sm text-green-600 font-semibold mt-1">Save {plan.yearlyDiscount}% annually</div>
         )}
       </div>
 
-      <ul className='space-y-2 mb-4'>
+      <ul className="space-y-2 mb-4">
         {plan.features.map((feature, i) => (
-          <li key={i} className='flex items-center gap-2'>
-            <CheckCircle className='w-4 h-4 text-success' />
-            <span>{feature}</span>
+          <li key={i} className="flex items-center gap-2">
+            <CheckCircle className="w-4 h-4 text-success" />
+            <span>{feature.name}</span>
           </li>
         ))}
       </ul>

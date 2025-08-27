@@ -5,7 +5,15 @@ export type SubscriptionPlan = {
   price: number;
   billingCycle: "monthly" | "yearly";
   availableTo: ("athlete" | "team")[];
-  features: string[];
+  features: [
+    {
+      name: string;
+      shortDescription: string;
+      detailedDescription: string;
+      type: string;
+      isActive: boolean;
+    }
+  ];
   tier?: "silver" | "gold" | "platnium"; // optional since not all have it
   isActive: boolean;
   createdAt: string; // ISO date string
