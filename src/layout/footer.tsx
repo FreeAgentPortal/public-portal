@@ -25,7 +25,7 @@ const Footer = () => {
           <div className="text-center sm:text-right">
             <h4 className="font-semibold text-gray-600 mb-2">Contact Us</h4>
             <p className="text-xs mb-1">Phone: (503) 702-7541</p>
-            <p className="text-xs mb-2">131 Sterling Ct, Bluff City, TN 37618</p>
+            <p className="text-xs mb-2">PO Box 935 Blountville, TN 37617</p>
             <div className="text-xs space-y-1">
               <p>
                 Billing:{" "}
