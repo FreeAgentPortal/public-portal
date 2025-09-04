@@ -36,9 +36,11 @@ export default function AthleteGrid(props: Props) {
   return (
     <>
       <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4'>
-        {data.payload.map((athlete, i) => (
-          <AthleteCard key={i} athlete={athlete} />
-        ))}
+        {data.payload
+          .filter((a) => a.profileImageUrl)
+          .map((athlete, i) => (
+            <AthleteCard key={i} athlete={athlete} />
+          ))}
       </div>
       <PaginationControls
         currentPage={Number(props.page)}

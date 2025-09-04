@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import parse from "html-react-parser";
 
 type Props = {
@@ -25,11 +24,6 @@ export const NewsCard = ({
     >
       {image && (
         <div className='relative w-full h-64 mb-4 rounded-lg overflow-hidden shadow-lg'>
-          {category && (
-            <span className='absolute top-3 left-3 z-10 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white text-xs font-semibold uppercase px-3 py-1 rounded-full shadow-md select-none pointer-events-none'>
-              {category}
-            </span>
-          )}
           <Image
             src={image}
             alt={title}
