@@ -5,6 +5,6 @@ import { Team } from "@/types/team";
 export function useTeamLeagues() {
   return useQuery<ApiResponse<Team[]>>({
     queryKey: ["teams"],
-    queryFn: () => apiFetch<Team[]>(`/team`),
+    queryFn: () => apiFetch<Team[]>(`/team?pageLimit=1000`),
   });
 }
