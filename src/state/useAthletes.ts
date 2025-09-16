@@ -14,14 +14,11 @@ function formatCustomQuery(filters?: Record<string, string>): string | null {
     })
     .join("|");
 }
-export function useAthletes(
-  page: string,
-  search?: string,
-  filters?: Record<string, string>
-) {
+export function useAthletes(page: string, search?: string, filters?: Record<string, string>) {
   const modifiedFilters: Record<string, string> = {
     ...filters,
     isActive: "true",
+    profileImageUrl: '{"$exists":true}',
   };
   delete modifiedFilters.page;
   delete modifiedFilters.search;
