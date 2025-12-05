@@ -1,10 +1,6 @@
 // lib/api.ts
-export async function apiFetch<T>(
-  url: string,
-  options?: RequestInit
-): Promise<ApiResponse<T>> {
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+export async function apiFetch<T>(url: string, options?: RequestInit): Promise<ApiResponse<T>> {
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
   const res = await fetch(process.env.NEXT_PUBLIC_API_URL + url, {
     ...options,
@@ -32,10 +28,7 @@ export async function apiFetch<T>(
   } as ApiResponse<T>;
 }
 
-export async function normalFetch<T>(
-  url: string,
-  options?: RequestInit
-): Promise<T> {
+export async function normalFetch<T>(url: string, options?: RequestInit): Promise<T> {
   const res = await fetch(url, {
     ...options,
     headers: {
@@ -53,3 +46,10 @@ export async function normalFetch<T>(
 
   return json as T;
 }
+
+export const getSignings = async (limit?: number) => {
+  const url = limit ? `/feed/signing?limit=${limit}` : "/feed/signing";
+  return apiFetch<ISigning[]>(url);
+};
+
+import type ISigning from "@/types/ISigning";
