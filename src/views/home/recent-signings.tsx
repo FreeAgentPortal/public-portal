@@ -10,7 +10,7 @@ export const RecentSignings = () => {
 
   if (isLoading) {
     return (
-      <div className="py-12">
+      <div className="relative overflow-hidden">
         <h2 className="text-4xl font-bold text-center mb-8 text-white">Recent Signings</h2>
         <Loading />
       </div>
