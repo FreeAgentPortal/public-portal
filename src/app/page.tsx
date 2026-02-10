@@ -5,7 +5,7 @@ import { RecentSignings } from "@/views/home/recent-signings";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-9 mt-16">
+    <div className="flex flex-col gap-9 mt-1">
       <RecentSignings />
       <TeamsLeagueScroll />
       <News />
