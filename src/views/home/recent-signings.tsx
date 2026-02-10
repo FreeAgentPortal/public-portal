@@ -38,7 +38,7 @@ export const RecentSignings = () => {
   }
 
   return (
-    <div className="py-12 px-4 max-w-7xl mx-auto">
+    <div className="relative overflow-hidden">   {/*<div className="py-12 px-4 max-w-7xl mx-auto"> */}
       <div className="text-center mb-12">
         <h2 className="text-4xl md:text-5xl font-bold mb-3 text-white">From Free Agent to Signed Athlete</h2>
         <p className="text-lg text-gray-300">Athletes who've made the jump through The Free Agent Portal</p>
